@@ -1,10 +1,13 @@
 package com.aknindustries.miwoktranslator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,26 +15,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView numbersTextView = findViewById(R.id.numbers);
-        numbersTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(this, NumbersActivity.class);
-            startActivity(intent);
-        });
-        TextView familyTextView = findViewById(R.id.family);
-        familyTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FamilyActivity.class);
-            startActivity(intent);
-        });
-        TextView colorsTextView = findViewById(R.id.colors);
-        colorsTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(this, ColorsActivity.class);
-            startActivity(intent);
-        });
-        TextView phrasesTextView = findViewById(R.id.phrases);
-        phrasesTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(this, PhrasesActivity.class);
-            startActivity(intent);
-        });
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.setAdapter(adapter);
     }
 
 }
